@@ -85,15 +85,16 @@ public class Element {
      * @return element
      */
     public Element deleteElement(char value) {
-
-        if (isSorted() && this.value == value) {
-            return this.next;
-        } else {
-            if (this.next != null) {
-                this.next = this.next.deleteElement(value);
+        if (isSorted()) {
+            if (this.value == value) {
+                return this.next;
+            } else {
+                if (this.next != null) {
+                    this.next = this.next.deleteElement(value);
+                }
+                return this;
             }
-            return this;
-        }
+        }return this;
     }
 
     /**
@@ -103,7 +104,7 @@ public class Element {
      * @return element
      */
     public Element insertElement(char value) {
-        if (TestisPredecessor(value) && this.value > value) {
+        if (!TestisPredecessor(value) && this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);

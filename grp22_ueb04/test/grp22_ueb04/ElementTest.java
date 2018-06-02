@@ -310,9 +310,9 @@ public class ElementTest {
     public void testIsPredecessor() {
         Element el = createElements('a','B', 'b', 'c' ,'D');
         //assertEquals('a', el.getValue());
-        //assertEquals('B', el.getNext().getValue());
-        //assertEquals('b', el.getNext().getNext().getValue());
-        //assertEquals('c', el.getNext().getNext().getNext().getValue());
+         assertTrue( el.TestisPredecessor('C'));
+         assertTrue( el.TestisPredecessor('x'));
+         assertTrue( el.TestisPredecessor('f'));
         assertTrue( el.TestisPredecessor('B'));
          assertTrue( el.TestisPredecessor('c'));
           assertTrue( el.TestisPredecessor('D'));
