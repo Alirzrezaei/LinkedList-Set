@@ -86,7 +86,7 @@ public class Element {
      */
     public Element deleteElement(char value) {
 
-        if (this.value == value) {
+        if (isSorted() && this.value == value) {
             return this.next;
         } else {
             if (this.next != null) {
@@ -234,23 +234,13 @@ public class Element {
         }
     }
     private boolean isPredecessor(char value) {
-        if (this.next == null) {
-            return false;
+      if(Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)){
+        return true;
         }
-        if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value) &&
-                Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)) {
-            return true;
-        } 
-        else if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value)
-                && value >= this.getValue()) {
-            return true;
-        }
-        else if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value)
-                && Character.toLowerCase(this.getValue()) > Character.toLowerCase(value)) {
-            return false;
-        } else {
-             return this.next.isPredecessor(value); 
-        }
+      else if(Character.toLowerCase(this.getValue()) == Character.toLowerCase(value) && this.value < value){
+          return true;
+      }
+       return false;
     }
 
     public boolean TestisPredecessor(char value) {

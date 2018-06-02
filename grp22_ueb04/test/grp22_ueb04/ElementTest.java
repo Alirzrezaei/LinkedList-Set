@@ -83,12 +83,12 @@ public class ElementTest {
         assertEquals('c', result.getNext().getValue());
         assertEquals('d', result.getNext().getNext().getValue());
         assertNull(result.getNext().getNext().getNext());
-    }
-    
+    }   
     @Test
     public void testInsertElement_AtEnd() {
         Element el = createElements('b', 'd');
         Element result = el.insertElement('e');
+        System.out.println(el.showElements());
         assertEquals('b', result.getValue());
         assertEquals('d', result.getNext().getValue());
         assertEquals('e', result.getNext().getNext().getValue());
@@ -319,22 +319,6 @@ public class ElementTest {
            assertFalse( el.TestisPredecessor('a'));
     }
     @Test
-    public void testIsPredecessor_unsorted() {
-        Element el = createElements('B','A','A', 'a','D' , 'b', 'c' );
-        //assertEquals('a', el.getValue());
-        //assertEquals('B', el.getNext().getValue());
-        //assertEquals('b', el.getNext().getNext().getValue());
-        //assertEquals('c', el.getNext().getNext().getNext().getValue());
-        assertFalse( el.TestisPredecessor('A'));
-        assertTrue( el.TestisPredecessor('c'));
-        assertTrue( el.TestisPredecessor('D'));
-        assertFalse( el.TestisPredecessor('B'));
-        assertFalse( el.TestisPredecessor('e'));
-        assertTrue( el.TestisPredecessor('a'));
-        assertFalse( el.TestisPredecessor('A'));
-        
-    }
-    @Test
     public void testIsPredecessor_WithOneValue() {
         Element el = createElements('a');
         assertFalse( el.TestisPredecessor('a'));
@@ -342,7 +326,7 @@ public class ElementTest {
      @Test
     public void testIsPredecessor_NotExistValue() {
         Element el = createElements('a' , 'B');
-        assertFalse(el.TestisPredecessor('E'));
+        assertTrue(el.TestisPredecessor('E'));
     }
      @Test
     public void testOwnInsertElement_AtFront() {
@@ -389,7 +373,8 @@ public class ElementTest {
         assertTrue( result.TestisPredecessor('B'));
         assertEquals('a', result.getValue());
         assertEquals('B', result.getNext().getValue());
-        assertEquals('c', result.getNext().getNext().getValue());   
+        assertEquals('c', result.getNext().getNext().getValue());
+        
     }
 }
 
