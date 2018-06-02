@@ -109,8 +109,11 @@ public class Element {
             newElement.setNext(this);
             return newElement;
         }
-        else if(TestisPredecessor(value)){
-            insertElementAt(value, 1);
+        else if(TestisPredecessor(value) &&  Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)){
+           Element newElement = new Element();
+            newElement.setValue(value);
+            newElement.setNext(this.next.next);
+            this.setNext(newElement);
             return this;
         }  
             else if (this.next == null) {
