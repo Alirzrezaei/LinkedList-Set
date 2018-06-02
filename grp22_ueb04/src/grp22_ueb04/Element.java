@@ -103,19 +103,12 @@ public class Element {
      * @return element
      */
     public Element insertElement(char value) {
-        if (!TestisPredecessor(value) && this.value > value) {
+        if (TestisPredecessor(value) && this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
         }
-        else if(TestisPredecessor(value) &&  Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)){
-           Element newElement = new Element();
-            newElement.setValue(value);
-            newElement.setNext(this.next.next);
-            this.setNext(newElement);
-            return this;
-        }  
             else if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
