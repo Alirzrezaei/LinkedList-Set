@@ -103,12 +103,17 @@ public class Element {
      * @return element
      */
     public Element insertElement(char value) {
-        if (this.value > value) {
+        if (!TestisPredecessor(value) && this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
-        } else if (this.next == null) {
+        }
+        else if(TestisPredecessor(value)){
+            insertElementAt(value, 1);
+            return this;
+        }  
+            else if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
             this.next = newElement;
@@ -232,23 +237,29 @@ public class Element {
             return this;
         }
     }
-        private boolean isPredecessor(char value){
-        if(this.next == null){
+    private boolean isPredecessor(char value) {
+        if (this.next == null) {
             return false;
         }
-        if(isSorted() && Character.toLowerCase(this.next.getValue())  == Character.toLowerCase(value)){
+        if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value) &&
+                Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)) {
+            return true;
+        } 
+        else if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value)
+                && value >= this.getValue()) {
             return true;
         }
-        else if(Character.toLowerCase(this.next.getValue())  == Character.toLowerCase(value) && this.getValue() < value){
-            return true;
+        else if (Character.toLowerCase(this.next.getValue()) == Character.toLowerCase(value)
+                && Character.toLowerCase(this.getValue()) > Character.toLowerCase(value)) {
+            return false;
+        } else {
+             return this.next.isPredecessor(value); 
         }
-        else 
-            return this.next.isPredecessor(value);
     }
-    
-     public boolean TestisPredecessor(char value){
-         return isPredecessor(value);
-     } 
+
+    public boolean TestisPredecessor(char value) {
+        return isPredecessor(value);
+    }
 }
 
     
