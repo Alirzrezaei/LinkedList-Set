@@ -110,6 +110,7 @@ public class ElementTest {
     public void testDeleteElement_InMiddle() {
         Element el = createElements('a', 'b', 'c');
         Element result = el.deleteElement('b');
+        System.out.println(result.showElements());
         assertEquals('a', result.getValue());
         assertEquals('c', result.getNext().getValue());
         assertNull(result.getNext().getNext());
