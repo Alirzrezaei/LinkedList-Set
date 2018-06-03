@@ -120,6 +120,7 @@ public class ElementTest {
     public void testDeleteElement_AtEnd() {
         Element el = createElements('a', 'b', 'c');
         Element result = el.deleteElement('c');
+        System.out.println(result.showElements());
         assertEquals('a', result.getValue());
         assertEquals('b', result.getNext().getValue());
         assertNull(result.getNext().getNext());
@@ -219,7 +220,7 @@ public class ElementTest {
     @Test
     public void testShowElements() {
         Element el = createElements('a', 'b', 'c');
-        assertEquals("a b c", el.showElements());
+        assertEquals("a, b, c", el.showElements());
         
         el = createElements('b');
         assertEquals("b", el.showElements());

@@ -85,10 +85,16 @@ public class Element {
      * @return element
      */
     public Element deleteElement(char value) {
-        if (isSorted()) {
-            if (this.value == value) {
+        if (isSorted() && existsElement(value)) {
+            
+            if(!isPredecessor(value) && this.value == value){
                 return this.next;
-            } else {
+            }
+            else if (isPredecessor(value) && this.next.value == value) {
+                this.setNext(this.next.next);
+                return this;
+            } 
+            else {
                 if (this.next != null) {
                     this.next = this.next.deleteElement(value);
                 }
@@ -104,18 +110,20 @@ public class Element {
      * @return element
      */
     public Element insertElement(char value) {
-        if (!TestisPredecessor(value) && this.value > value) {
+       if (!TestisPredecessor(value) && this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
         }
-            else if (this.next == null) {
+       
+       else if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
             this.next = newElement;
             return this;
-        } else {
+        }
+       else {
             this.next = this.next.insertElement(value);
             return this;
         }
@@ -156,14 +164,23 @@ public class Element {
      * @return true if the value is exists
      */
     public boolean existsElement(char value) {
-        if (this.value == value) {
-            return true;
-        } else if (this.next != null) {
-            return this.next.existsElement(value);
+        if (isSorted()) {
 
-        } else {
-            return false;
+            if (!isPredecessor(value) && this.value == value) {
+                return true;
+            }
+            else if(isPredecessor(value) && this.next != null && this.next.value == value){
+                return true;
+            }
+            else if (this.next != null) {
+                return this.next.existsElement(value);
+
+            } else {
+                return false;
+            }
+
         }
+        return false;
     }
 
     /**
@@ -178,7 +195,7 @@ public class Element {
             return "" + this.getValue();
         } else {
 
-            return this.getValue() + " " + this.next.showElements();
+            return this.getValue() + ", " + this.next.showElements();
         }
 
     }
