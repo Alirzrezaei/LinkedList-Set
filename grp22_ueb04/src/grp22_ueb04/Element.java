@@ -260,6 +260,17 @@ public class Element {
       }
        return false;
     }
+    public boolean isSame(Element other){
+        if (this.next == null && other.next == null && this.value == other.value) {
+            return true;
+        } else if (this.next == null || other.next == null) {
+            return false;
+        } else if (this.value != other.value) {
+            return false;
+        } else {
+            return this.next.isSame(other.next);
+        }
+    }
 
     public boolean TestisPredecessor(char value) {
         return isPredecessor(value);

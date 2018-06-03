@@ -378,6 +378,53 @@ public class ElementTest {
         assertEquals('c', result.getNext().getNext().getValue());
         
     }
+     @Test
+    public void testOwnIsSame_trueCase() {
+        Element el = createElements('a','c' ,'e');
+        Element other = createElements('a','c' ,'e');
+        System.out.println(other.showElements());
+        assertTrue(el.isSame(other));
+        assertEquals('a', other.getValue());
+        assertEquals('c', other.getNext().getValue());
+        assertEquals('e', other.getNext().getNext().getValue()); 
+    }
+    @Test
+    public void testOwnIsSame_diffSize() {
+        Element el = createElements('a','c' ,'e');
+        Element other = createElements('a','c');
+        System.out.println(other.showElements());
+        assertFalse(el.isSame(other));
+        assertEquals('a', other.getValue());
+        assertEquals('c', other.getNext().getValue());
+        
+    }
+    @Test
+    public void testOwnIsSame_trueCase2() {
+        Element el = createElements('a','c');
+        Element other = createElements('a','c' ,'e');
+        System.out.println(other.showElements());
+        assertFalse(el.isSame(other));
+        assertEquals('a', other.getValue());
+        assertEquals('c', other.getNext().getValue());
+        assertEquals('e', other.getNext().getNext().getValue());
+    }
+    @Test
+    public void testOwnIsSame_diffValues() {
+        Element el = createElements('a', 'c', 'd');
+        Element other = createElements('a', 'c' ,'e');
+        System.out.println(other.showElements());
+        assertFalse(el.isSame(other));
+        assertEquals('a', other.getValue());
+        assertEquals('c', other.getNext().getValue());
+        assertEquals('e', other.getNext().getNext().getValue());
+    }
+    @Test
+    public void testOwnIsSame_EmptySets() {
+        Element el = new Element();
+        Element other = new Element();
+        assertTrue(el.isSame(other));
+        
+    }
 }
 
 
