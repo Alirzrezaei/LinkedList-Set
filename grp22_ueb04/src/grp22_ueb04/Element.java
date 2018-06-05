@@ -72,10 +72,10 @@ public class Element {
             newElement.setValue(value);
             this.next = newElement;
 
-        } else {
+        } else 
             this.next = this.next.appendElement(value);
-        }
         return this;
+        
     }
 
     /**

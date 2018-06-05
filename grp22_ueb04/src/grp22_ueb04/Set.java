@@ -25,7 +25,11 @@ public class Set {
         }
     }
     public void addElementList(Element list){
-        
+        for(int i = 0; i < list.size(); i++){
+            if(!this.sets.existsElement(list.getElementAt(i))){
+                this.sets.insertElement(list.getElementAt(i));
+            }
+        }
     }
     public boolean isEmpty(){
         return sets == null;
@@ -51,7 +55,8 @@ public class Set {
     }
     public void addElement(char value){
         if(isEmpty()){
-           this.sets.appendElement(value);
+           sets = new Element();
+            sets.setValue(value);
         }
         else {
             if(!this.sets.existsElement(value)){
@@ -81,7 +86,15 @@ public class Set {
             return "{" + sets.showElements() + "}";
         }
     }
-    
+    public char[] getValues() {
+        char[] values = new char[size()];
+        if (!isEmpty()) {
+            for (int i = 0; i < values.length; i++) {
+                values[i] = sets.getElementAt(i);
+            }
+        }
+        return values;
+    }
     public Set union(Set other) {
         Set unionSet = new Set();
         if (this.isEmpty() && other.isEmpty()) {

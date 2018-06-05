@@ -24,11 +24,14 @@ public class SetTest {
      @Test
     public void testAddElement() {
         Set newSet = new Set("aBf");
+        assertEquals(3, newSet.size());
         
     }
      @Test
-    public void testInterSection() {
-       
+    public void testAddElement_emptyConstructor() {
+       Set newSet = new Set();
+       assertEquals(0, newSet.size());
+       newSet.addElement('A');
     }
 
     
