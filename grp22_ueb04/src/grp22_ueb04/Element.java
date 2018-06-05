@@ -1,7 +1,8 @@
 /**
- * this class, Element, is making new element and appending, deleting, inserting
- * elements recursivly. It also check if the element is sorted returns true
- * . This class can be used as intance class for Mylist class.
+ * this class, Element, is making new element in a Linked-List and appending, deleting, inserting
+ * elements in recursive manner. It also check if the Linked-List of elements is sorted. 
+ * Also, in this class two Linked-List are being checked if they have values with same length. 
+ * . This class can be used as instance class for a list class to make a list of elements with char value.
  *
  */
 package grp22_ueb04;
@@ -262,6 +263,7 @@ public class Element {
             return true;
         }
         return false;
+ 
     }
 
     /**
