@@ -115,8 +115,14 @@ public class Element {
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
-        }
-       
+        } 
+       else if(TestisPredecessor(value) && this.next != null && Character.toLowerCase(this.next.value) > Character.toLowerCase(value)){
+           Element newElement = new Element();
+           newElement.setValue(value);
+           newElement.setNext(this.next);
+           this.setNext(newElement);
+           return this;
+       }
        else if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
@@ -164,7 +170,7 @@ public class Element {
      * @return true if the value is exists
      */
     public boolean existsElement(char value) {
-        if (isSorted()) {
+      
 
             if (!isPredecessor(value) && this.value == value) {
                 return true;
@@ -178,8 +184,7 @@ public class Element {
             } else {
                 return false;
             }
-        }
-        return false;
+
     }
 
     /**

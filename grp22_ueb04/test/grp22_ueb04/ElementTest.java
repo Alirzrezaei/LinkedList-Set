@@ -304,145 +304,164 @@ public class ElementTest {
     
 //</editor-fold>
 
-
-    
-    
-    
-     @Test
+       @Test
     public void testIsPredecessor() {
-        Element el = createElements('a','B', 'b', 'c' ,'D');
-        //assertEquals('a', el.getValue());
-         assertTrue( el.TestisPredecessor('C'));
-         assertTrue( el.TestisPredecessor('x'));
-         assertTrue( el.TestisPredecessor('f'));
-        assertTrue( el.TestisPredecessor('B'));
-         assertTrue( el.TestisPredecessor('c'));
-          assertTrue( el.TestisPredecessor('D'));
-           assertFalse( el.TestisPredecessor('a'));
+        Element el = createElements('a', 'B', 'b', 'c', 'D');
+        assertTrue(el.TestisPredecessor('C'));
+        assertTrue(el.TestisPredecessor('x'));
+        assertTrue(el.TestisPredecessor('f'));
+        assertTrue(el.TestisPredecessor('B'));
+        assertTrue(el.TestisPredecessor('c'));
+        assertTrue(el.TestisPredecessor('D'));
+        assertFalse(el.TestisPredecessor('a'));
     }
+
     @Test
     public void testIsPredecessor_WithOneValue() {
         Element el = createElements('a');
-        assertFalse( el.TestisPredecessor('a'));
+        assertFalse(el.TestisPredecessor('a'));
     }
-     @Test
+
+    @Test
     public void testIsPredecessor_NotExistValue() {
-        Element el = createElements('a' , 'B');
+        Element el = createElements('a', 'B');
         assertTrue(el.TestisPredecessor('E'));
     }
-     @Test
+
+    @Test
     public void testOwnInsertElement_AtFront() {
-        Element el = createElements('A','b', 'E' , 'e');
+        Element el = createElements('A', 'b', 'E', 'e');
         Element result = el.insertElement('a');
         System.out.println(result.showElements(","));
-        assertTrue( el.TestisPredecessor('a'));
+        assertTrue(el.TestisPredecessor('a'));
         assertEquals('A', result.getValue());
         assertEquals('a', result.getNext().getValue());
         assertEquals('b', result.getNext().getNext().getValue());
-        //assertNull(result.getNext().getNext().getNext().getNext());
-        
+
     }
-     @Test
+
+    @Test
     public void testOwnInsertElement_UpperCaseinserted() {
-        Element el = createElements('a','b', 'E' , 'e');
+        Element el = createElements('a', 'b', 'E', 'e');
         Element result = el.insertElement('A');
         System.out.println(result.showElements(","));
-        assertTrue( result.TestisPredecessor('a'));
-        assertTrue( result.TestisPredecessor('E'));
+        assertTrue(result.TestisPredecessor('a'));
+        assertTrue(result.TestisPredecessor('E'));
         assertEquals('A', result.getValue());
         assertEquals('a', result.getNext().getValue());
         assertEquals('b', result.getNext().getNext().getValue());
         assertNull(result.getNext().getNext().getNext().getNext().getNext());
-    }    
+    }
+
     @Test
     public void testOwnInsertElement() {
-        Element el = createElements('a','b', 'E' , 'e');
+        Element el = createElements('a', 'c', 'E', 'e');
         Element result = el.insertElement('B');
         System.out.println(result.showElements(","));
-        assertFalse( result.TestisPredecessor('a'));
-        assertTrue( result.TestisPredecessor('B'));
-        assertEquals('a', result.getValue());
-        assertEquals('B', result.getNext().getValue());
-        assertEquals('b', result.getNext().getNext().getValue());
-        assertNull(result.getNext().getNext().getNext().getNext().getNext());   
-    }
-    @Test
-    public void testOwnInsertElement_beforeSuccessor() {
-        Element el = createElements('a','c' ,'e');
-        Element result = el.insertElement('B');
-        System.out.println(result.showElements(","));
-        assertFalse( result.TestisPredecessor('a'));
-        assertTrue( result.TestisPredecessor('B'));
+        assertFalse(result.TestisPredecessor('a'));
+        assertTrue(result.TestisPredecessor('B'));
         assertEquals('a', result.getValue());
         assertEquals('B', result.getNext().getValue());
         assertEquals('c', result.getNext().getNext().getValue());
-        
+        assertNull(result.getNext().getNext().getNext().getNext().getNext());
     }
-     @Test
+
+    @Test
+    public void testOwnInsertElement2() {
+        Element el = createElements('A', 'B', 'E', 'e');
+        Element result = el.insertElement('c');
+        System.out.println(result.showElements(","));
+        assertTrue(result.TestisPredecessor('a'));
+        result.insertElement('a');
+        System.out.println(result.showElements(","));
+    }
+
+    @Test
+    public void testOwnInsertElement_beforeSuccessor() {
+        Element el = createElements('a', 'c', 'e');
+        Element result = el.insertElement('B');
+        System.out.println(result.showElements(","));
+        assertFalse(result.TestisPredecessor('a'));
+        assertTrue(result.TestisPredecessor('B'));
+        assertEquals('a', result.getValue());
+        assertEquals('B', result.getNext().getValue());
+        assertEquals('c', result.getNext().getNext().getValue());
+
+    }
+
+    @Test
     public void testOwnIsSame_trueCase() {
-        Element el = createElements('A', 'a', 'c' ,'e');
-        Element other = createElements('A', 'a', 'c' ,'e');
+        Element el = createElements('A', 'a', 'c', 'e');
+        Element other = createElements('A', 'a', 'c', 'e');
         System.out.println(other.showElements(","));
-        assertTrue(el.isSame(other));    
+        assertTrue(el.isSame(other));
     }
+
     @Test
     public void testOwnIsSame_diffSize() {
-        Element el = createElements('a','c' ,'e');
-        Element other = createElements('a','c');
+        Element el = createElements('a', 'c', 'e');
+        Element other = createElements('a', 'c');
         System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());
-        
+
     }
+
     @Test
     public void testOwnIsSame_trueCase2() {
-        Element el = createElements('a','c');
-        Element other = createElements('a','c' ,'e');
+        Element el = createElements('a', 'c');
+        Element other = createElements('a', 'c', 'e');
         System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());
         assertEquals('e', other.getNext().getNext().getValue());
     }
+
     @Test
     public void testOwnIsSame_diffValuesAtFront() {
         Element el = createElements('A', 'c', 'e');
-        Element other = createElements('a', 'c' ,'e');
+        Element other = createElements('a', 'c', 'e');
         System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
-      
+
     }
+
     @Test
     public void testOwnIsSame_diffValuesInMiddle() {
         Element el = createElements('A', 'C', 'e');
-        Element other = createElements('A', 'c' ,'e');
+        Element other = createElements('A', 'c', 'e');
         System.out.println(other.showElements(","));
-        assertFalse(el.isSame(other));   
+        assertFalse(el.isSame(other));
     }
+
     @Test
     public void testOwnIsSame_diffValuesLastElement() {
         Element el = createElements('A', 'c', 'E');
-        Element other = createElements('A', 'c' ,'e');
+        Element other = createElements('A', 'c', 'e');
         System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
-        
     }
+
     @Test
     public void testOwnIsSame_EmptySets() {
         Element el = new Element();
         Element other = new Element();
         assertTrue(el.isSame(other));
     }
+
     @Test
     public void testOwnIsSame_OneIsEmpty() {
         Element el = createElements('A', 'c', 'E');
         Element other = new Element();
         assertFalse(el.isSame(other));
-        
+    }
+
+    @Test
+    public void testownExistElement() {
+        Element el = createElements('A', 'c', 'E');
+        assertTrue(el.existsElement('A'));
+        //assertFalse(el.existsElement('b'));
     }
 }
-
-
-
-

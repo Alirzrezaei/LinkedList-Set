@@ -12,25 +12,13 @@ package grp22_ueb04;
 public class Set {
     Element sets;
     
-    public Set(){
-        
+    Set(){  
     }
-    public Set(String value){
+    
+    Set(String value){
         this.addElement(value);
     }
-    public void addElement(String value){
-        
-        for(int i = 0; i < value.length(); i++){
-            this.addElement(value.charAt(i));
-        }
-    }
-    public void addElementList(Element list){
-        for(int i = 0; i < list.size(); i++){
-            if(!this.sets.existsElement(list.getElementAt(i))){
-                this.sets.insertElement(list.getElementAt(i));
-            }
-        }
-    }
+   
     public boolean isEmpty(){
         return sets == null;
     }
@@ -58,9 +46,8 @@ public class Set {
            sets = new Element();
             sets.setValue(value);
         }
-        else if(!this.sets.existsElement(value)){
-            sets = sets.insertElement(value);
-            
+        else if(!sets.existsElement(value)){
+            sets = sets.insertElement(value);  
         }
     }
     public boolean existsElement(char value){
@@ -68,7 +55,7 @@ public class Set {
             return false;
         }
         else{
-            return this.sets.existsElement(value);
+            return sets.existsElement(value);
         }
     }
     public void deleteElement(char value){
@@ -85,7 +72,7 @@ public class Set {
             return "{" + sets.showElements(seperator) + "}";
         }
     }
-    public char[] getValues() {
+    char[] getValues() {
         char[] values = new char[size()];
         if (!isEmpty()) {
             for (int i = 0; i < values.length; i++) {
@@ -97,7 +84,7 @@ public class Set {
     public Set union(Set other) {
         Set unionSet = new Set();
         if (!this.isEmpty()){
-            unionSet = this.cloneSet(); //copy of this set
+            unionSet = this.CloneSet(); //copy of this set
         }
         if(!other.isEmpty()){
             for (int i = 0; i < other.sets.size(); i++) {
@@ -105,15 +92,13 @@ public class Set {
             }
         }
             return unionSet;
-    
-
     }
     public Set intersection(Set other) {
         Set interSection = new Set();
         if (this.isEmpty() || other.isEmpty()) {
             return interSection;
         } else if (this.sets.isSame(other.sets)) {
-            interSection.cloneSet();
+            interSection= this.CloneSet();
         } else {
             for (int i = 0; i < other.sets.size(); i++) {
                 if (this.sets.existsElement(other.sets.getElementAt(i))) {
@@ -125,10 +110,19 @@ public class Set {
     } 
     public Set diff(Set other){
         Set differnece = new Set();
+         if (this.isEmpty()) {
+            return differnece;
+        } else if (other.isEmpty()) {
+           
+                differnece=this.CloneSet();
+            
+            return differnece;
+        } else{
         for(int i = 0; i < this.sets.size(); i++){
             if(!other.sets.existsElement(this.sets.getElementAt(i))){
                 differnece.addElement(this.sets.getElementAt(i));
             }
+        }
         }return differnece;
     }
     public Set symmDiff(Set other) {
@@ -136,23 +130,41 @@ public class Set {
         if (this.isEmpty() && other.isEmpty()) {
             return symmtricDiff;
         } else if (this.isEmpty() || other.isEmpty()) {
-            return symmtricDiff = union(other);
+            return symmtricDiff = this.union(other);
         } else {
             Set diff1 = new Set();
-            diff1 = union(other).cloneSet();
+            diff1 = this.union(other);
             Set diff2 = new Set();
-            diff2 = intersection(other).cloneSet();
+            diff2 = this.intersection(other);
             symmtricDiff = diff1.diff(diff2);
         }
         return symmtricDiff;
     }
-    public Set cloneSet(){
+    private Set cloneSet(){
         Set CloneSet = new Set();
         for(int i = 0; i< this.sets.size(); i++){
             CloneSet.addElement(this.sets.getElementAt(i));
         }
         return CloneSet;
     }
+    public Set CloneSet(){
+        return cloneSet();
+    }
+     private void addElement(String value){
+        
+        for(int i = 0; i < value.length(); i++){
+            addElement(value.charAt(i));
+        }
+    }
+   
+    private void addElementList(Element list){
+        for(int i = 0; i < list.size(); i++){
+            if(!existsElement(list.getElementAt(i))){
+                sets = sets.insertElement(list.getElementAt(i));
+            }
+        }
+    }
+  
 
   
 }
