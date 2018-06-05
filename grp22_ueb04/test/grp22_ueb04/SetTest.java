@@ -37,6 +37,17 @@ public class SetTest {
        assertEquals(0, newSet.size());
        newSet.addElement('A');
     }
-
+    
+     @Test
+    public void testUnion() {
+       Set newSet1 = new Set("AaBcDEfG");
+       Set newSet2 = new Set("AbcdEFfg");   
+       Set newSet3 = newSet1.union(newSet2);
+       System.out.println(newSet1.showValues(","));
+       System.out.println(newSet2.showValues(","));
+       System.out.println(newSet3.showValues(","));
+       assertEquals(16, newSet3.size());   
+    }
+    
     
 }

@@ -58,10 +58,9 @@ public class Set {
            sets = new Element();
             sets.setValue(value);
         }
-        else {
-            if(!this.sets.existsElement(value)){
+        else if(!this.sets.existsElement(value)){
             sets = sets.insertElement(value);
-            }
+            
         }
     }
     public boolean existsElement(char value){
@@ -69,7 +68,7 @@ public class Set {
             return false;
         }
         else{
-            return sets.existsElement(value);
+            return this.sets.existsElement(value);
         }
     }
     public void deleteElement(char value){
@@ -97,17 +96,16 @@ public class Set {
     }
     public Set union(Set other) {
         Set unionSet = new Set();
-        if (this.isEmpty() && other.isEmpty()) {
-            return unionSet;
-        } else {
-            unionSet.cloneSet(); //copy of this set
-            for (int i = 0; i < other.sets.size(); i++) {
-                if (!unionSet.existsElement(other.sets.getElementAt(i))) {
-                    unionSet.addElement(other.sets.getElementAt(i));
-                }
-            }
-            return unionSet;
+        if (!this.isEmpty()){
+            unionSet = this.cloneSet(); //copy of this set
         }
+        if(!other.isEmpty()){
+            for (int i = 0; i < other.sets.size(); i++) {
+                    unionSet.addElement(other.sets.getElementAt(i));
+            }
+        }
+            return unionSet;
+    
 
     }
     public Set intersection(Set other) {
