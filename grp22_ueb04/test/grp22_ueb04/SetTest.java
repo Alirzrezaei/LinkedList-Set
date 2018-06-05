@@ -25,6 +25,10 @@ public class SetTest {
     public void testAddElement() {
         Set newSet = new Set("aBf");
         assertEquals(3, newSet.size());
+        newSet.addElement('A');
+        assertEquals(4, newSet.size());
+        System.out.println(newSet.showValues(","));
+        
         
     }
      @Test

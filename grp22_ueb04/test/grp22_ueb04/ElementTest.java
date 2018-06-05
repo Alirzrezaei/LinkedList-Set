@@ -88,7 +88,7 @@ public class ElementTest {
     public void testInsertElement_AtEnd() {
         Element el = createElements('b', 'd');
         Element result = el.insertElement('e');
-        System.out.println(el.showElements());
+        System.out.println(el.showElements(","));
         assertEquals('b', result.getValue());
         assertEquals('d', result.getNext().getValue());
         assertEquals('e', result.getNext().getNext().getValue());
@@ -110,7 +110,7 @@ public class ElementTest {
     public void testDeleteElement_InMiddle() {
         Element el = createElements('a', 'b', 'c');
         Element result = el.deleteElement('b');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertEquals('a', result.getValue());
         assertEquals('c', result.getNext().getValue());
         assertNull(result.getNext().getNext());
@@ -120,7 +120,7 @@ public class ElementTest {
     public void testDeleteElement_AtEnd() {
         Element el = createElements('a', 'b', 'c');
         Element result = el.deleteElement('c');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertEquals('a', result.getValue());
         assertEquals('b', result.getNext().getValue());
         assertNull(result.getNext().getNext());
@@ -220,10 +220,10 @@ public class ElementTest {
     @Test
     public void testShowElements() {
         Element el = createElements('a', 'b', 'c');
-        assertEquals("a, b, c", el.showElements());
+        assertEquals("a, b, c", el.showElements(","));
         
         el = createElements('b');
-        assertEquals("b", el.showElements());
+        assertEquals("b", el.showElements(","));
     }
     
     //-----------------------------------------------
@@ -334,7 +334,7 @@ public class ElementTest {
     public void testOwnInsertElement_AtFront() {
         Element el = createElements('A','b', 'E' , 'e');
         Element result = el.insertElement('a');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertTrue( el.TestisPredecessor('a'));
         assertEquals('A', result.getValue());
         assertEquals('a', result.getNext().getValue());
@@ -346,7 +346,7 @@ public class ElementTest {
     public void testOwnInsertElement_UpperCaseinserted() {
         Element el = createElements('a','b', 'E' , 'e');
         Element result = el.insertElement('A');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertTrue( result.TestisPredecessor('a'));
         assertTrue( result.TestisPredecessor('E'));
         assertEquals('A', result.getValue());
@@ -358,7 +358,7 @@ public class ElementTest {
     public void testOwnInsertElement() {
         Element el = createElements('a','b', 'E' , 'e');
         Element result = el.insertElement('B');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertFalse( result.TestisPredecessor('a'));
         assertTrue( result.TestisPredecessor('B'));
         assertEquals('a', result.getValue());
@@ -370,7 +370,7 @@ public class ElementTest {
     public void testOwnInsertElement_beforeSuccessor() {
         Element el = createElements('a','c' ,'e');
         Element result = el.insertElement('B');
-        System.out.println(result.showElements());
+        System.out.println(result.showElements(","));
         assertFalse( result.TestisPredecessor('a'));
         assertTrue( result.TestisPredecessor('B'));
         assertEquals('a', result.getValue());
@@ -382,7 +382,7 @@ public class ElementTest {
     public void testOwnIsSame_trueCase() {
         Element el = createElements('a','c' ,'e');
         Element other = createElements('a','c' ,'e');
-        System.out.println(other.showElements());
+        System.out.println(other.showElements(","));
         assertTrue(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());
@@ -392,7 +392,7 @@ public class ElementTest {
     public void testOwnIsSame_diffSize() {
         Element el = createElements('a','c' ,'e');
         Element other = createElements('a','c');
-        System.out.println(other.showElements());
+        System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());
@@ -402,7 +402,7 @@ public class ElementTest {
     public void testOwnIsSame_trueCase2() {
         Element el = createElements('a','c');
         Element other = createElements('a','c' ,'e');
-        System.out.println(other.showElements());
+        System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());
@@ -412,7 +412,7 @@ public class ElementTest {
     public void testOwnIsSame_diffValues() {
         Element el = createElements('a', 'c', 'd');
         Element other = createElements('a', 'c' ,'e');
-        System.out.println(other.showElements());
+        System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
         assertEquals('a', other.getValue());
         assertEquals('c', other.getNext().getValue());

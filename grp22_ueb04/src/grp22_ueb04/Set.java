@@ -79,11 +79,11 @@ public class Set {
             sets = sets.deleteElement(value);
         }
     }
-    public String showValues(String separator) {
+    public String showValues(String seperator) {
         if (isEmpty()) {
             return "{}";
         } else {
-            return "{" + sets.showElements() + "}";
+            return "{" + sets.showElements(seperator) + "}";
         }
     }
     public char[] getValues() {

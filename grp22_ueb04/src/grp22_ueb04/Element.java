@@ -188,13 +188,13 @@ public class Element {
      *
      * @return String
      */
-    public String showElements() {
+    public String showElements(String seperator) {
 
         if (this.next == null) {
             return "" + this.getValue();
         } else {
 
-            return this.getValue() + ", " + this.next.showElements();
+            return this.getValue() + seperator+" " + this.next.showElements(seperator);
         }
 
     }
