@@ -24,6 +24,9 @@ public class Set {
             this.addElement(value.charAt(i));
         }
     }
+    public void addElementList(Element list){
+        
+    }
     public boolean isEmpty(){
         return sets == null;
     }
