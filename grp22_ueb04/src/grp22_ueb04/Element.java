@@ -178,7 +178,6 @@ public class Element {
             } else {
                 return false;
             }
-
         }
         return false;
     }

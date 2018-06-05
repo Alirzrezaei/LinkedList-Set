@@ -14,11 +14,22 @@ import static org.junit.Assert.*;
  */
 public class SetTest {
     
-    public SetTest() {
+    private Set createList(String value) {
+        Set list = new Set(value);
+        return list;
+    }
+ 
+
+  
+     @Test
+    public void testAddElement() {
+        Set newSet = new Set("aBf");
+        
+    }
+     @Test
+    public void testInterSection() {
+       
     }
 
-    @Test
-    public void testSomeMethod() {
-    }
     
 }
