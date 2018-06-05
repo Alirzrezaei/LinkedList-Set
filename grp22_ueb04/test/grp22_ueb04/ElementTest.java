@@ -380,13 +380,10 @@ public class ElementTest {
     }
      @Test
     public void testOwnIsSame_trueCase() {
-        Element el = createElements('a','c' ,'e');
-        Element other = createElements('a','c' ,'e');
+        Element el = createElements('A', 'a', 'c' ,'e');
+        Element other = createElements('A', 'a', 'c' ,'e');
         System.out.println(other.showElements(","));
-        assertTrue(el.isSame(other));
-        assertEquals('a', other.getValue());
-        assertEquals('c', other.getNext().getValue());
-        assertEquals('e', other.getNext().getNext().getValue()); 
+        assertTrue(el.isSame(other));    
     }
     @Test
     public void testOwnIsSame_diffSize() {
@@ -409,20 +406,39 @@ public class ElementTest {
         assertEquals('e', other.getNext().getNext().getValue());
     }
     @Test
-    public void testOwnIsSame_diffValues() {
-        Element el = createElements('a', 'c', 'd');
+    public void testOwnIsSame_diffValuesAtFront() {
+        Element el = createElements('A', 'c', 'e');
         Element other = createElements('a', 'c' ,'e');
         System.out.println(other.showElements(","));
         assertFalse(el.isSame(other));
-        assertEquals('a', other.getValue());
-        assertEquals('c', other.getNext().getValue());
-        assertEquals('e', other.getNext().getNext().getValue());
+      
+    }
+    @Test
+    public void testOwnIsSame_diffValuesInMiddle() {
+        Element el = createElements('A', 'C', 'e');
+        Element other = createElements('A', 'c' ,'e');
+        System.out.println(other.showElements(","));
+        assertFalse(el.isSame(other));   
+    }
+    @Test
+    public void testOwnIsSame_diffValuesLastElement() {
+        Element el = createElements('A', 'c', 'E');
+        Element other = createElements('A', 'c' ,'e');
+        System.out.println(other.showElements(","));
+        assertFalse(el.isSame(other));
+        
     }
     @Test
     public void testOwnIsSame_EmptySets() {
         Element el = new Element();
         Element other = new Element();
         assertTrue(el.isSame(other));
+    }
+    @Test
+    public void testOwnIsSame_OneIsEmpty() {
+        Element el = createElements('A', 'c', 'E');
+        Element other = new Element();
+        assertFalse(el.isSame(other));
         
     }
 }
