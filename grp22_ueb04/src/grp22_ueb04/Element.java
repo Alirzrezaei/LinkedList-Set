@@ -17,13 +17,13 @@ public class Element {
     public static final char INVALID_VALUE = 0;
 
     public Element() {
-       //default constructor 
+        //default constructor 
     }
-    
+
     public Element(char value) {
-        this.value = value; 
+        this.value = value;
     }
-    
+
     /**
      * gets the value of the element
      *
@@ -72,10 +72,11 @@ public class Element {
             newElement.setValue(value);
             this.next = newElement;
 
-        } else 
+        } else {
             this.next = this.next.appendElement(value);
+        }
         return this;
-        
+
     }
 
     /**
@@ -86,21 +87,20 @@ public class Element {
      */
     public Element deleteElement(char value) {
         if (isSorted() && existsElement(value)) {
-            
-            if(!isPredecessor(value) && this.value == value){
+
+            if (!isPredecessor(value) && this.value == value) {
                 return this.next;
-            }
-            else if (isPredecessor(value) && this.next.value == value) {
+            } else if (isPredecessor(value) && this.next.value == value) {
                 this.setNext(this.next.next);
                 return this;
-            } 
-            else {
+            } else {
                 if (this.next != null) {
                     this.next = this.next.deleteElement(value);
                 }
                 return this;
             }
-        }return this;
+        }
+        return this;
     }
 
     /**
@@ -110,26 +110,23 @@ public class Element {
      * @return element
      */
     public Element insertElement(char value) {
-       if (!TestisPredecessor(value) && this.value > value) {
+        if (!TestisPredecessor(value) && this.value > value) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
-        } 
-       else if(TestisPredecessor(value) && this.next != null && Character.toLowerCase(this.next.value) > Character.toLowerCase(value)){
-           Element newElement = new Element();
-           newElement.setValue(value);
-           newElement.setNext(this.next);
-           this.setNext(newElement);
-           return this;
-       }
-       else if (this.next == null) {
+        } else if (TestisPredecessor(value) && this.next != null && Character.toLowerCase(this.next.value) > Character.toLowerCase(value)) {
+            Element newElement = new Element();
+            newElement.setValue(value);
+            newElement.setNext(this.next);
+            this.setNext(newElement);
+            return this;
+        } else if (this.next == null) {
             Element newElement = new Element();
             newElement.setValue(value);
             this.next = newElement;
             return this;
-        }
-       else {
+        } else {
             this.next = this.next.insertElement(value);
             return this;
         }
@@ -170,20 +167,17 @@ public class Element {
      * @return true if the value is exists
      */
     public boolean existsElement(char value) {
-      
 
-            if (!isPredecessor(value) && this.value == value) {
-                return true;
-            }
-            else if(isPredecessor(value) && this.next != null && this.next.value == value){
-                return true;
-            }
-            else if (this.next != null) {
-                return this.next.existsElement(value);
+        if (!isPredecessor(value) && this.value == value) {
+            return true;
+        } else if (isPredecessor(value) && this.next != null && this.next.value == value) {
+            return true;
+        } else if (this.next != null) {
+            return this.next.existsElement(value);
 
-            } else {
-                return false;
-            }
+        } else {
+            return false;
+        }
 
     }
 
@@ -199,7 +193,7 @@ public class Element {
             return "" + this.getValue();
         } else {
 
-            return this.getValue() + seperator+" " + this.next.showElements(seperator);
+            return this.getValue() + seperator + " " + this.next.showElements(seperator);
         }
 
     }
@@ -255,16 +249,29 @@ public class Element {
             return this;
         }
     }
+
+    /**
+     *
+     * @param value given value
+     * @return true if this.value is a predecessor of value
+     */
     private boolean isPredecessor(char value) {
-      if(Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)){
-        return true;
+        if (Character.toLowerCase(this.getValue()) < Character.toLowerCase(value)) {
+            return true;
+        } else if (Character.toLowerCase(this.getValue()) == Character.toLowerCase(value) && this.value < value) {
+            return true;
         }
-      else if(Character.toLowerCase(this.getValue()) == Character.toLowerCase(value) && this.value < value){
-          return true;
-      }
-       return false;
+        return false;
     }
-    public boolean isSame(Element other){
+
+    /**
+     * checks if this and the respective successor contain the same values and
+     * if the the list have the same length
+     *
+     * @param other given element
+     * @return true if the given element is the same with current
+     */
+    public boolean isSame(Element other) {
         if (this.next == null && other.next == null && this.value == other.value) {
             return true;
         } else if (this.next == null || other.next == null) {
@@ -280,6 +287,3 @@ public class Element {
         return isPredecessor(value);
     }
 }
-
-    
-
