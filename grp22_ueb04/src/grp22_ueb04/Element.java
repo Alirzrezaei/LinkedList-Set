@@ -89,7 +89,7 @@ public class Element {
     public Element deleteElement(char value) {
         if (isSorted() && existsElement(value)) {
 
-            if (!isPredecessor(value) && this.value == value) {
+            if (!isPredecessor(value) && this.value == value) {//first case a==a
                 return this.next;
             } else if (isPredecessor(value) && this.next.value == value) {
                 this.setNext(this.next.next);
@@ -116,7 +116,8 @@ public class Element {
             newElement.setValue(value);
             newElement.setNext(this);
             return newElement;
-        } else if (TestisPredecessor(value) && this.next != null && Character.toLowerCase(this.next.value) > Character.toLowerCase(value)) {
+        } else if (TestisPredecessor(value) && this.next != null && 
+                Character.toLowerCase(this.next.value) > Character.toLowerCase(value)) {
             Element newElement = new Element();
             newElement.setValue(value);
             newElement.setNext(this.next);
