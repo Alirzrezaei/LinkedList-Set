@@ -10,7 +10,7 @@ import static org.junit.Assert.*;
 
 /**
  *
- * @author Alireza TODO: Get rid of all outputs, add proper asserts
+ *  TODO DONE: Get rid of all outputs, add proper asserts
  */
 public class SetTest {
 
