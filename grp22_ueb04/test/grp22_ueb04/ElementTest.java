@@ -220,7 +220,7 @@ public class ElementTest {
     @Test
     public void testShowElements() {
         Element el = createElements('a', 'b', 'c');
-        assertEquals("a, b, c", el.showElements(","));
+        assertEquals("a,b,c", el.showElements(","));
         
         el = createElements('b');
         assertEquals("b", el.showElements(","));

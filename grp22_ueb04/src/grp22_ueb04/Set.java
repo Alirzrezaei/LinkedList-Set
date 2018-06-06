@@ -145,14 +145,8 @@ public class Set {
      */
     public Set union(Set other) {
         Set unionSet = new Set();
-        if (!this.isEmpty()) {
-            unionSet = this.CloneSet(); //copy of this set
-        }
-        if (!other.isEmpty()) {
-            for (int i = 0; i < other.sets.size(); i++) {
-                unionSet.addElement(other.sets.getElementAt(i));
-            }
-        }
+        unionSet.addElementList(other.sets);
+        unionSet.addElementList(this.sets);
         return unionSet;
     }
 
@@ -211,19 +205,7 @@ public class Set {
      * current with the given set
      */
     public Set symmDiff(Set other) {
-        Set symmtricDiff = new Set();
-        if (this.isEmpty() && other.isEmpty()) {
-            return symmtricDiff;
-        } else if (this.isEmpty() || other.isEmpty()) {
-            return symmtricDiff = this.union(other);
-        } else {
-            Set diff1 = new Set();
-            diff1 = this.union(other);
-            Set diff2 = new Set();
-            diff2 = this.intersection(other);
-            symmtricDiff = diff1.diff(diff2);
-        }
-        return symmtricDiff;
+        return (this.union(other).diff(this.intersection(other)));
     }
 
     /**
@@ -231,16 +213,8 @@ public class Set {
      *
      * @return a set which is copy of the set
      */
-    private Set cloneSet() {
-        Set CloneSet = new Set();
-        for (int i = 0; i < this.sets.size(); i++) {
-            CloneSet.addElement(this.sets.getElementAt(i));
-        }
-        return CloneSet;
-    }
-
-    public Set CloneSet() {
-        return cloneSet();
+    private Set CloneSet() {
+        return (new Set().union(this));
     }
 
     /**
@@ -249,9 +223,10 @@ public class Set {
      * @param value given string
      */
     private void addElement(String value) {
-
-        for (int i = 0; i < value.length(); i++) {
-            addElement(value.charAt(i));
+        if (value != null) {
+            for (int i = 0; i < value.length(); i++) {
+                addElement(value.charAt(i));
+            }
         }
     }
 
@@ -261,11 +236,12 @@ public class Set {
      * @param list given element
      */
     private void addElementList(Element list) {
-        for (int i = 0; i < list.size(); i++) {
-            if (!existsElement(list.getElementAt(i))) {
-                sets = sets.insertElement(list.getElementAt(i));
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                addElement(list.getElementAt(i));
             }
         }
+
     }
 
 }

@@ -1,7 +1,7 @@
 /**
  * this class, Element, is making new element in a Linked-List and appending, deleting, inserting
- * elements in recursive manner. It also check if the Linked-List of elements is sorted. 
- * Also, in this class two Linked-List are being checked if they have values with same length. 
+ * elements in recursive manner. It also check if the Linked-List of elements is sorted.
+ * Also, in this class two Linked-List are being checked if they have values with same length.
  * . This class can be used as instance class for a list class to make a list of elements with char value.
  *
  */
@@ -194,7 +194,7 @@ public class Element {
             return "" + this.getValue();
         } else {
 
-            return this.getValue() + seperator + " " + this.next.showElements(seperator);
+            return this.getValue() + seperator + this.next.showElements(seperator);
         }
 
     }
@@ -263,7 +263,7 @@ public class Element {
             return true;
         }
         return false;
- 
+
     }
 
     /**
@@ -274,7 +274,9 @@ public class Element {
      * @return true if the given element is the same with current
      */
     public boolean isSame(Element other) {
-        if (this.next == null && other.next == null && this.value == other.value) {
+        if (other == null) {
+            return false;
+        } else if (this.next == null && other.next == null && this.value == other.value) {
             return true;
         } else if (this.next == null || other.next == null) {
             return false;
@@ -283,6 +285,7 @@ public class Element {
         } else {
             return this.next.isSame(other.next);
         }
+
     }
 
     public boolean TestisPredecessor(char value) {
